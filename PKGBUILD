@@ -12,10 +12,10 @@ depends=(
     'openstack-keystone-git'
     'git'
     'flake8-python2'
-    'python-subunit'
     'python2-extras'
     'python2-mimeparse'
     'python2-pbr'
+    'python2-subunit'
     'python2-testtools'
     'python2-virtualenv'
 )
