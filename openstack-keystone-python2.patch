@@ -1,0 +1,84 @@
+commit b9f4d7e047cd02e5ab54c8148811975c0c287439
+Author: Christoph Gysin <christoph.gysin@gmail.com>
+Date:   Sat May 17 11:21:17 2014 +0300
+
+    python2
+
+diff --git a/run_tests.sh b/run_tests.sh
+index f2086d5..8826ac2 100755
+--- a/run_tests.sh
++++ b/run_tests.sh
+@@ -100,8 +100,8 @@ function run_flake8 {
+ 
+   echo "Running flake8 ..."
+   # Just run flake8 in current environment
+-  echo ${wrapper} flake8 $FLAGS | tee pep8.txt
+-  ${wrapper} flake8 $FLAGS | tee pep8.txt
++  echo ${wrapper} flake8-python2 $FLAGS | tee pep8.txt
++  ${wrapper} flake8-python2 $FLAGS | tee pep8.txt
+ }
+ 
+ if [ $never_venv -eq 0 ]
+diff --git a/tools/colorizer.py b/tools/colorizer.py
+index c9f7d63..4c9da76 100755
+--- a/tools/colorizer.py
++++ b/tools/colorizer.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python2
+ 
+ # Copyright (c) 2013, Nebula, Inc.
+ # Copyright 2010 United States Government as represented by the
+diff --git a/tools/install_venv.py b/tools/install_venv.py
+index e01ae3f..4400ae1 100644
+--- a/tools/install_venv.py
++++ b/tools/install_venv.py
+@@ -1,3 +1,4 @@
++#!/usr/bin/python2
+ # Copyright 2013 IBM Corp.
+ # Copyright 2012 OpenStack Foundation
+ # Copyright 2010 United States Government as represented by the
+@@ -46,7 +47,7 @@ def print_help():
+ 
+     Also, make test will automatically use the virtualenv.
+     """
+-    print help
++    print(help)
+ 
+ 
+ def main(argv):
+diff --git a/tools/install_venv_common.py b/tools/install_venv_common.py
+index 46822e3..a12c468 100644
+--- a/tools/install_venv_common.py
++++ b/tools/install_venv_common.py
+@@ -94,10 +94,10 @@ class InstallVenv(object):
+         if not os.path.isdir(self.venv):
+             print('Creating venv...', end=' ')
+             if no_site_packages:
+-                self.run_command(['virtualenv', '-q', '--no-site-packages',
++                self.run_command(['virtualenv2', '-q', '--no-site-packages',
+                                  self.venv])
+             else:
+-                self.run_command(['virtualenv', '-q', self.venv])
++                self.run_command(['virtualenv2', '-q', self.venv])
+             print('done.')
+         else:
+             print("venv already exists...")
+@@ -136,7 +136,7 @@ class Distro(InstallVenv):
+                     check_exit_code=False).strip())
+ 
+     def install_virtualenv(self):
+-        if self.check_cmd('virtualenv'):
++        if self.check_cmd('virtualenv2'):
+             return
+ 
+         if self.check_cmd('easy_install'):
+@@ -163,7 +163,7 @@ class Fedora(Distro):
+                                           check_exit_code=False)[1] == 0
+ 
+     def install_virtualenv(self):
+-        if self.check_cmd('virtualenv'):
++        if self.check_cmd('virtualenv2'):
+             return
+ 
+         if not self.check_pkg('python-virtualenv'):

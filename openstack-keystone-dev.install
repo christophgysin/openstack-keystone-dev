@@ -1,0 +1,11 @@
+post_install() {
+    cat << EOF
+
+    To get started:
+
+     $ git clone git://git.openstack.org/openstack/keystone
+     $ cd keystone
+     $ patch -p1 </usr/share/openstack-keystone-dev/python2.patch
+     $ ./run_tests.sh
+EOF
+}
